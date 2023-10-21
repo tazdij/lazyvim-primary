@@ -4,7 +4,7 @@ return {
         cmd = "Copilot",
         build = ":Copilot auth",
         opts = {
-            suggestion = { enabled = false },
+            suggestion = { enabled = true, auto_trigger = true },
             panel = { enabled = false },
             filetypes = { ["*"] = true },
         },
@@ -12,7 +12,9 @@ return {
     {
         "zbirenbaum/copilot-cmp",
         dependencies = "copilot.lua",
-        opts = {},
+        opts = {
+            
+        },
         config = function(_, opts)
             local copilot_cmp = require("copilot_cmp")
             copilot_cmp.setup(opts)
