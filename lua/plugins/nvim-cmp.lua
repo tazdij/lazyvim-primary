@@ -35,20 +35,18 @@ return {
             local cmp = require("cmp")
 
             opts.mapping = vim.tbl_extend("force", opts.mapping, {
-                ["<Tab>"] = cmp.mapping(function(fallback)
+                -- Define the down arrow to select the next item in the completion menu
+                ["<Down>"] = cmp.mapping(function(fallback) 
                     if cmp.visible() then
                         cmp.select_next_item()
-                        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-                        -- this way you will only jump inside the snippet region
                     elseif luasnip.expand_or_jumpable() then
                         luasnip.expand_or_jump()
-                    elseif has_words_before() then
-                        cmp.complete()
                     else
                         fallback()
                     end
                 end, { "i", "s" }),
-                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                -- Define the up arrow to select the previous item in the completion menu
+                ["<Up>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
                     elseif luasnip.jumpable(-1) then
@@ -57,7 +55,29 @@ return {
                         fallback()
                     end
                 end, { "i", "s" }),
-                ["<CR>"] = cmp.mapping.confirm({
+                -- ["<Tab>"] = cmp.mapping(function(fallback)
+                --     if cmp.visible() then
+                --         cmp.select_next_item()
+                --         -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+                --         -- this way you will only jump inside the snippet region
+                --     elseif luasnip.expand_or_jumpable() then
+                --         luasnip.expand_or_jump()
+                --     elseif has_words_before() then
+                --         cmp.complete()
+                --     else
+                --         fallback()
+                --     end
+                -- end, { "i", "s" }),
+                -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+                --     if cmp.visible() then
+                --         cmp.select_prev_item()
+                --     elseif luasnip.jumpable(-1) then
+                --         luasnip.jump(-1)
+                --     else
+                --         fallback()
+                --     end
+                -- end, { "i", "s" }),
+                ["<Tab>"] = cmp.mapping.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = true,
                 }),
