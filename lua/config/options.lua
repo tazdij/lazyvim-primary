@@ -14,3 +14,7 @@ vim.opt.autoindent = true
 
 vim.g.autoformat = false
 
+-- If we are on windows, we want to specify the shell to use powershell
+if vim.fn.has("win32") == 1 then
+    vim.opt.shell = "powershell.exe"
+end
