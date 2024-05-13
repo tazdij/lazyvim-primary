@@ -2,6 +2,11 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 --
+
+vim.opt.termguicolors = true
+
+vim.opt.winbar = "%=%m %f"
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -11,10 +16,11 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
 vim.opt.autoindent = true
-
 vim.g.autoformat = false
 
 -- If we are on windows, we want to specify the shell to use powershell
 if vim.fn.has("win32") == 1 then
     vim.opt.shell = "powershell.exe"
 end
+
+vim.g.autoclose = 0
