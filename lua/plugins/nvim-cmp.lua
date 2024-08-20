@@ -36,7 +36,7 @@ return {
 
             opts.mapping = vim.tbl_extend("force", opts.mapping, {
                 -- Define the down arrow to select the next item in the completion menu
-                ["<Down>"] = cmp.mapping(function(fallback) 
+                ["<Down>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
                     elseif luasnip.expand_or_jumpable() then
@@ -77,12 +77,21 @@ return {
                 --         fallback()
                 --     end
                 -- end, { "i", "s" }),
-                ["<Tab>"] = cmp.mapping.confirm({
+                ["<CR>"] = cmp.mapping.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = true,
                 }),
                 ["<C-Space>"] = cmp.mapping.complete(),
-                ["<Esc>"] = cmp.mapping.close(),
+                ["<Esc>"] = cmp.mapping({
+                    i = cmp.mapping.abort(),
+                    c = function()
+                        if cmp.visible() then
+                            cmp.close()
+                        else
+                            vim.api.nvim_feedkays(vim.api.nvim_replace_termcodes("<C-c>", true, true, true), "n", true)
+                        end
+                    end,
+                }),
                 --["<C-t>"] = { 
                 --    "copilot#Accept('\\<CR>')", 
                 --    desc = "copilot expand", 
