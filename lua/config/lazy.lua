@@ -35,6 +35,7 @@ require("lazy").setup({
       disabled_plugins = {
         "gzip",
         -- "Adding test line",
+        -- "Adding test line",
         -- "matchit",
         -- "matchparen",
         -- "netrwPlugin",
